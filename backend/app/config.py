@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     groq_api_key: str
     supabase_url: str
     supabase_service_key: str
-    allowed_origins: str = "http://localhost:5173"
+    allowed_origins: str = "http://localhost:5173, https://resume-screener-tawny-ten.vercel.app/"
 
     @property
     def origins_list(self) -> list[str]:
