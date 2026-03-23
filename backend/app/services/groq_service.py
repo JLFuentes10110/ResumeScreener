@@ -1,5 +1,5 @@
 import json
-from groq import Groq
+from groq import AsyncGroq
 from app.config import get_settings
 from app.models.schemas import AnalysisResult
 
@@ -40,11 +40,11 @@ def get_verdict(score: int) -> str:
 
 async def analyze_resume(resume_text: str, job_description: str) -> AnalysisResult:
     settings = get_settings()
-    client = Groq(api_key=settings.groq_api_key)
+    client = AsyncGroq(api_key=settings.groq_api_key)
 
     user_prompt = f"RESUME:\n{resume_text}\n\nJOB DESCRIPTION:\n{job_description}"
 
-    response = client.chat.completions.create(
+    response = await client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
